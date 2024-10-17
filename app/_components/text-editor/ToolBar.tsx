@@ -14,7 +14,6 @@ import {
   AlignRight,
   Highlighter,
   Upload,
-  Underline,
 } from "lucide-react";
 import { Editor } from "@tiptap/core";
 
@@ -34,7 +33,7 @@ export default function ToolBar({ editor }: ToolBarProps) {
     }
   };
 
-  // Toolbar options
+  // Toolbar options with correct "pressed" state and click handling
   const Options = [
     {
       icon: <Heading1 className="size-4" />,
@@ -55,11 +54,6 @@ export default function ToolBar({ editor }: ToolBarProps) {
       icon: <Bold className="size-4" />,
       onClick: () => editor.chain().focus().toggleBold().run(),
       pressed: editor.isActive("bold"),
-    },
-    {
-      icon: <Underline className="size-4" />,
-      onClick: () => editor.chain().focus().toggleUnderline().run(),
-      pressed: editor.isActive("underline"),
     },
     {
       icon: <Italic className="size-4" />,
@@ -119,8 +113,8 @@ export default function ToolBar({ editor }: ToolBarProps) {
         <Toggle
           key={i}
           size="sm"
-          pressed={option.pressed}
-          onPressedChange={option.onClick}
+          pressed={option.pressed} // Correctly setting the pressed state
+          onPressedChange={option.onClick} // Handling clicks properly
         >
           {option.icon}
         </Toggle>
